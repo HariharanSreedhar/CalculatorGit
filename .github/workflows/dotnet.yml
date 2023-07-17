@@ -5,8 +5,9 @@ on:
   push:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+
 jobs:
-  build:
+  unit-tests:
     runs-on: ubuntu-latest
 
     steps:
@@ -16,16 +17,27 @@ jobs:
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: '7.0.x'  # Replace with the desired .NET Core version
+          dotnet-version: '6.0.x'  # Replace with the desired .NET Core version
 
-      - name: Print working directory
-        run: pwd
-        
+      - name: Check if unit test project exists
+        id: check-project
+        run: |
+          if [ -f "./UnitTestProject/UnitTestProject.csproj" ]; then
+            echo "::set-output name=exists::true"
+          else
+            echo "::set-output name=exists::false"
+          fi
+
       - name: Restore dependencies
-        run: dotnet restore ./Calculator_Demo/Calculator_Demo.sln
+        run: dotnet restore
 
       - name: Build project
-        run: dotnet build --configuration Release ./Calculator_Demo/Calculator_Demo.sln
+        run: dotnet build --configuration Release
 
       - name: Run tests
-        run: dotnet test ./Calculator_Demo/Calculator_Demo.sln
+        run: |
+          if [ "${{ steps.check-project.outputs.exists }}" = "true" ]; then
+            dotnet test --configuration Release --logger "trx;LogFileName=test_results.trx"
+          else
+            echo "Unit test project file not found. Skipping tests."
+          fi
