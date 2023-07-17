@@ -28,4 +28,4 @@ jobs:
         run: dotnet build --configuration Release ./Calculator_Demo/Calculator_Demo.sln
 
       - name: Run tests
-        run: dotnet test 
+        run: dotnet test ./Calculator_Demo/Calculator_Demo.sln
