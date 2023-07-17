@@ -22,7 +22,7 @@ jobs:
         run: pwd
         
       - name: Restore dependencies
-        run: dotnet restore 
+        run: dotnet restore ./Calculator_Demo/Calculator_Demo.sln
 
       - name: Build project
         run: dotnet build --configuration Release --solution 
