@@ -1,5 +1,6 @@
 name: Main Branch
-
+env:
+    file_location: ./Calculator_Demo/Calculator_Demo.sln
 on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
@@ -31,7 +32,7 @@ jobs:
           fi
 
       - name: Restore dependencies
-        run: dotnet restore ./Calculator_Demo/Calculator_Demo.sln
+        run: dotnet restore file_location
 
       - name: Build project
         run: dotnet build --configuration Release ./Calculator_Demo/Calculator_Demo.sln
