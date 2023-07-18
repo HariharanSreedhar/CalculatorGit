@@ -33,14 +33,14 @@ jobs:
           fi
 
       - name: Restore dependencies
-        run: dotnet restore "solution_file_location"
+        run: dotnet restore "$solution_file_location"
 
       - name: Build project
-        run: dotnet build --configuration Release "solution_file_location"
+        run: dotnet build --configuration Release "$solution_file_location"
       - name: Run tests
         run: |
           if [ "${{ steps.check-project.outputs.exists }}" = "true" ]; then
-            dotnet test --configuration Release "solution_file_location"
+            dotnet test --configuration Release "$solution_file_location"
           else
             echo "Unit test project file not found. Skipping tests."
           fi
