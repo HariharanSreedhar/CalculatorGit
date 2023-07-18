@@ -32,7 +32,7 @@ jobs:
           fi
 
       - name: Restore dependencies
-        run: dotnet restore file_location
+        run: dotnet restore "$file_location"
 
       - name: Build project
         run: dotnet build --configuration Release ./Calculator_Demo/Calculator_Demo.sln
