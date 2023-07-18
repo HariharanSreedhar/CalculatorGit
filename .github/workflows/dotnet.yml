@@ -1,6 +1,7 @@
 name: Main Branch
 env:
-    file_location: ./Calculator_Demo/Calculator_Demo.sln
+    solution_file_location: ./Calculator_Demo/Calculator_Demo.sln
+    testfile_csproj_location : ./Calculator_Demo/Calculator_Demo.Test/Calculator_Demo.Test.csproj
 on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
@@ -23,7 +24,7 @@ jobs:
       - name: Check if unit test project exists
         id: check-project
         run: |
-          if [ -f "./Calculator_Demo/Calculator_Demo.Test/Calculator_Demo.Test.csproj" ]; then
+          if [ -f "$testfile_csproj_location" ]; then
             echo "::set-output name=exists::true"
             echo "Test file found"
           else
@@ -35,12 +36,11 @@ jobs:
         run: dotnet restore "$file_location"
 
       - name: Build project
-        run: dotnet build --configuration Release ./Calculator_Demo/Calculator_Demo.sln
-
+        run: dotnet build --configuration Release "$file_location"
       - name: Run tests
         run: |
           if [ "${{ steps.check-project.outputs.exists }}" = "true" ]; then
-            dotnet test --configuration Release --logger "trx;LogFileName=test_results.trx" ./Calculator_Demo/Calculator_Demo.sln
+            dotnet test --configuration Release "$file_location"
           else
             echo "Unit test project file not found. Skipping tests."
           fi
