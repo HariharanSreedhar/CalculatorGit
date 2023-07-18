@@ -24,8 +24,10 @@ jobs:
         run: |
           if [ -f "./Calculator_Demo/Calculator_Demo.Test/Calculator_Demo.Test.csproj" ]; then
             echo "::set-output name=exists::true"
+            echo "Test file found"
           else
             echo "::set-output name=exists::false"
+            echo "Test file not found"
           fi
 
       - name: Restore dependencies
