@@ -17,22 +17,22 @@ jobs:
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: '6.0.x'  # Replace with the desired .NET Core version
+          dotnet-version: '7.0.x'  # Replace with the desired .NET Core version
 
       - name: Check if unit test project exists
         id: check-project
         run: |
-          if [ -f "./UnitTestProject/UnitTestProject.csproj" ]; then
+          if [ -f "./Calculator_Demo/Calculator_Demo.Test/Calculator_Demo.Test.csproj" ]; then
             echo "::set-output name=exists::true"
           else
             echo "::set-output name=exists::false"
           fi
 
       - name: Restore dependencies
-        run: dotnet restore
+        run: dotnet restore ./Calculator_Demo/Calculator_Demo.sln
 
       - name: Build project
-        run: dotnet build --configuration Release
+        run: dotnet build --configuration Release ./Calculator_Demo/Calculator_Demo.sln
 
       - name: Run tests
         run: |
