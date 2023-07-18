@@ -2,6 +2,7 @@ name: Main Branch
 env:
     solution_file_location: ./Calculator_Demo/Calculator_Demo.sln
     testfile_csproj_location : ./Calculator_Demo/Calculator_Demo.Test/Calculator_Demo.Test.csproj
+    dotnetVersion : 7.0.x  # Replace with the desired .NET Core version
 on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
@@ -19,7 +20,7 @@ jobs:
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: '7.0.x'  # Replace with the desired .NET Core version
+          dotnet-version: '$dotnetVersion' 
 
       - name: Check if unit test project exists
         id: check-project
