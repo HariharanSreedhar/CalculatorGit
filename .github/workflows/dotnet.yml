@@ -37,7 +37,7 @@ jobs:
       - name: Run tests
         run: |
           if [ "${{ steps.check-project.outputs.exists }}" = "true" ]; then
-            dotnet test --configuration Release --logger "trx;LogFileName=test_results.trx"
+            dotnet test --configuration Release --logger "trx;LogFileName=test_results.trx" ./Calculator_Demo/Calculator_Demo.sln
           else
             echo "Unit test project file not found. Skipping tests."
           fi
