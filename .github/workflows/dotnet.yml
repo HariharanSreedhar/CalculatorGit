@@ -1,9 +1,14 @@
-name: Main Branch
+name: Run Unit Test
+
+# Environmental variable 
 env:
+    # Replace with your solution location
     solution_file_location: ./Calculator_Demo/Calculator_Demo.sln
+    # Replace with your test project csproj file location
     testfile_csproj_location : ./Calculator_Demo/Calculator_Demo.Test/Calculator_Demo.Test.csproj
     # Replace with the desired .NET Core version
     dotnetVersion : 7.0.x  
+    
 on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
@@ -12,17 +17,23 @@ on:
 
 jobs:
   unit-tests:
-    runs-on: ubuntu-latest
+  
+    # Use the latest version of Windows as the runner
+    runs-on: windows-latest
 
     steps:
+    
+      # Checkout the repository to the runner
       - name: Checkout code
         uses: actions/checkout@v2
 
+      # Set up the .NET environment
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v1
         with:         
           dotnet-version: " 7.0.x" 
-
+          
+      # Checks if the unit test file exists
       - name: Check if unit test project exists
         id: check-project
         run: |
@@ -34,11 +45,15 @@ jobs:
             echo "Test file not found"
           fi
 
+       #Restore the project dependencies   
       - name: Restore dependencies
         run: dotnet restore "$solution_file_location"
 
+      # Build the project in Release configuration
       - name: Build project
         run: dotnet build --configuration Release "$solution_file_location"
+        
+      # Run the unit test if unit test file exists
       - name: Run tests
         run: |
           if [ "${{ steps.check-project.outputs.exists }}" = "true" ]; then
