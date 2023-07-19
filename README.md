@@ -32,4 +32,3 @@ Starter Repo Template for C# assignments
 3. Click configure and the dotnet.yaml file will be added to your workflow 
 4. Configure the yaml file as your need
 
-# How to configure yaml files
