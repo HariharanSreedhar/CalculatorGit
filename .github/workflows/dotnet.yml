@@ -1,9 +1,12 @@
-name: Main Branch
+name: Run Unit Test
 env:
+    # Replace with your solution location
     solution_file_location: ./Calculator_Demo/Calculator_Demo.sln
+    # Replace with your test project csproj file location
     testfile_csproj_location : ./Calculator_Demo/Calculator_Demo.Test/Calculator_Demo.Test.csproj
     # Replace with the desired .NET Core version
     dotnetVersion : 7.0.x  
+    
 on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
@@ -12,9 +15,11 @@ on:
 
 jobs:
   unit-tests:
+    # Use the latest version of Windows as the runner
     runs-on: ubuntu-latest
 
     steps:
+      # Checkout the repository to the runner
       - name: Checkout code
         uses: actions/checkout@v2
 
