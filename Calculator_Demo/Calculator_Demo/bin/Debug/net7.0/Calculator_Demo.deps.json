@@ -7,8 +7,19 @@
   "targets": {
     ".NETCoreApp,Version=v7.0": {
       "Calculator_Demo/1.0.0": {
+        "dependencies": {
+          "Calculator_Demo.Test": "1.0.0.0"
+        },
         "runtime": {
           "Calculator_Demo.dll": {}
+        }
+      },
+      "Calculator_Demo.Test/1.0.0.0": {
+        "runtime": {
+          "Calculator_Demo.Test.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       }
     }
@@ -16,6 +27,11 @@
   "libraries": {
     "Calculator_Demo/1.0.0": {
       "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Calculator_Demo.Test/1.0.0.0": {
+      "type": "reference",
       "serviceable": false,
       "sha512": ""
     }

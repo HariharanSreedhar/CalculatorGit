@@ -7,4 +7,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Reference Include="Calculator_Demo.Test">
+      <HintPath>..\Calculator_Demo.Test\obj\Debug\net7.0\Calculator_Demo.Test.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
